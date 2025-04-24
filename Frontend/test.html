@@ -1,0 +1,43 @@
+<form method="POST" onsubmit="signup(event)">
+    <input type="text" name="username" placeholder="Username" required />
+    <input type="password" name="password" placeholder="Password" required />
+    <input type="email" name="email" placeholder="email@email.com" required />
+    <button type="submit">signup</button>
+  </form>
+<form method="POST" onsubmit="login(event)">
+    <input type="text" name="username" placeholder="Username" required />
+    <input type="password" name="password" placeholder="Password" required />
+    <button type="submit">Login</button>
+  </form>
+  
+  <script>
+    async function login(e) {
+      e.preventDefault();
+      const res = await fetch("http://localhost/REACT-PHP/Backend/auth/login.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: e.target.username.value,
+          password: e.target.password.value,
+        })
+      });
+      const data = await res.json();
+      console.log(data);
+    }
+
+    async function signup(e) {
+      e.preventDefault();
+      const res = await fetch("http://localhost/REACT-PHP/Backend/auth/register.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: e.target.username.value,
+          password: e.target.password.value,
+          email: e.target.email.value
+        })
+      });
+      const data = await res.json();
+      console.log(data);
+    }
+  </script>
+  
