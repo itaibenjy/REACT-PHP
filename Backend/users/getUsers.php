@@ -1,12 +1,14 @@
 <?php
-require_once "../config/database.php";
-require_once "../utils/session.php";
 
 // CORS headers
 header("Access-Control-Allow-Origin: http://localhost:5173");
 header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Methods: GET, OPTIONS");
+
+
+require_once "../config/database.php";
+require_once "../utils/session.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
@@ -18,7 +20,12 @@ header("Content-Type: application/json");
 // Basic session check (could be expanded)
 if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
     http_response_code(403);
-    echo json_encode(["error" => "Unauthorized"]);
+    // show the user id and role for debugging
+    echo json_encode([
+        "error" => $_SESSION["role"] ?? null,
+        "user_id" => $_SESSION["user_id"] ?? null,
+        "role" => $_SESSION["role"] ?? null
+    ]);
     exit;
 }
 

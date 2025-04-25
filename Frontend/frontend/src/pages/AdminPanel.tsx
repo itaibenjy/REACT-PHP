@@ -15,11 +15,14 @@ const AdminPanel = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState<string | null>(null);
 
+  var userRole: string = "";
+  var userId: number = 0;
+
   useEffect(() => {
     const fetchUsers = async () => {
       const response = await getAllUsers();
       if (response.error) {
-        setError(response.error);
+        setError(response.error)
       } else {
         setUsers(response);
       }

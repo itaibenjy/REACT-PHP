@@ -16,6 +16,7 @@ const Dashboard = () => {
           Welcome, {user?.username}!
         </Typography>
         <Typography>Your role: {user?.role}</Typography>
+        <Typography>Your id: {user?.id}</Typography>
       </Container>
     </>
   );
